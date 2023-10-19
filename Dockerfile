@@ -23,7 +23,7 @@ RUN wget https://github.com/nushell/nushell/archive/${NUSHELL}.tar.gz && \
 WORKDIR /tmp/nushell-${NUSHELL}
 RUN TARGET=$(rustc -vV | sed -n 's/host: //p') && \
     EXCLUDE="--exclude nu-cmd-dataframe" && \
-    cat >> .cargo/config.toml <<EOF
+    cat <<EOF >> .cargo/config.toml
         [target.${TARGET}]
         git2 = { rustc-link-lib = ["git2"] }
         rusqlite = { rustc-link-lib = ["sqlite3"] }
