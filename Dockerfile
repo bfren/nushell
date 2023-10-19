@@ -24,6 +24,7 @@ WORKDIR /tmp/nushell-${NUSHELL}
 
 RUN TARGET=$(rustc -vV | sed -n 's/host: //p') && \  
     CONFIG=.cargo/config.toml && \
+    echo "" >> ${CONFIG} && \
     echo "[target.${TARGET}]" >> ${CONFIG} && \
     echo "git2 = { rustc-link-lib = [\"git2\"] }" >> ${CONFIG} && \
     echo "rusqlite = { rustc-link-lib = [\"sqlite3\"] }" >> ${CONFIG}
