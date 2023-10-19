@@ -21,13 +21,15 @@ RUN wget https://github.com/nushell/nushell/archive/${NUSHELL}.tar.gz && \
     
 # build and test nushell
 WORKDIR /tmp/nushell-${NUSHELL}
-RUN TARGET=$(rustc -vV | sed -n 's/host: //p') && \
-    EXCLUDE="--exclude nu-cmd-dataframe" && \
-    cat <<EOF >> .cargo/config.toml
+RUN TARGET=$(rustc -vV | sed -n 's/host: //p') && \    
+    cat >> .cargo/config.toml <<-EOF 
+    
         [target.${TARGET}]
         git2 = { rustc-link-lib = ["git2"] }
         rusqlite = { rustc-link-lib = ["sqlite3"] }
-    EOF && \
+        
+    EOF
+RUN EXCLUDE="--exclude nu-cmd-dataframe" && \
     cargo fetch --locked && \
     cargo build --workspace --release --frozen ${EXCLUDE} && \
     cargo test --workspace --frozen ${EXCLUDE}
