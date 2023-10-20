@@ -1,6 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
-N=0.86.0                                # Nushell version
+set -euo pipefail
+
+N=${1}                                  # Nushell version
 P=linux/amd64,linux/arm/v7,linux/arm64  # Platforms to build
 T=ghcr.io/bfren/nushell:${N}-alpine     # Tag to use
 
