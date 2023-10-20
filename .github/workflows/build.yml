@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        alpine: [3.15, 3.16, 3.17, 3.18]
+        distro: [alpine]
         nushell: [0.85.0, 0.86.0]
     steps:
       -
@@ -34,12 +34,11 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           build-args: |
-            ALPINE=${{ matrix.alpine }}
             NUSHELL=${{ matrix.nushell }}
           push: true
-          platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8
+          platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
           tags: |
-            ghcr.io/bfren/busybox:${{ matrix.nushell }}-alpine${{ matrix.alpine }}
+            ghcr.io/bfren/nushell:${{ matrix.nushell }}-${{ matrix.distro }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
