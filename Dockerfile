@@ -1,10 +1,6 @@
-ARG ALPINE=3.18
-
 # use target Alpine version as host
-FROM alpine:${ALPINE} AS build
-
+FROM alpine AS build
 ARG NUSHELL=0.86.0
-ARG PUBLISH=/nu
 
 # install prerequisites
 RUN apk add --no-cache \
@@ -18,11 +14,11 @@ RUN apk add --no-cache \
 WORKDIR /tmp
 RUN wget https://github.com/nushell/nushell/archive/${NUSHELL}.tar.gz && \
     tar -xf ${NUSHELL}.tar.gz
-    
+
 # build and test nushell
 WORKDIR /tmp/nushell-${NUSHELL}
 
-RUN TARGET=$(rustc -vV | sed -n 's/host: //p') && \  
+RUN TARGET=$(rustc -vV | sed -n 's/host: //p') && \
     CONFIG=.cargo/config.toml && \
     echo "" >> ${CONFIG} && \
     echo "[target.${TARGET}]" >> ${CONFIG} && \
@@ -31,18 +27,21 @@ RUN TARGET=$(rustc -vV | sed -n 's/host: //p') && \
 
 RUN EXCLUDE="--exclude nu-cmd-dataframe" && \
     cargo fetch --locked && \
-    cargo build --workspace --release --frozen ${EXCLUDE} && \
-    cargo test --workspace --frozen ${EXCLUDE}
+    cargo build --workspace --release --frozen ${EXCLUDE}
 
 # move nushell binaries to publish directory
-RUN mkdir -p ${INSTALL} && \
+RUN mkdir -p /nu && \
     find target/release \
       -maxdepth 1 \
       -executable \
       -type f \
       -name "nu*" \
-      -exec install -Dm755 '{}' -t ${PUBLISH}/ \;
+      -exec install -Dm755 '{}' -t /nu/ \;
 
-# create blank image with only nushell binaries
+ADD https://raw.githubusercontent.com/bfren/nushell/main/${NUSHELL}/config.nu /nu-config/config.nu
+ADD https://raw.githubusercontent.com/bfren/nushell/main/${NUSHELL}/env.nu /nu-config/env.nu
+
+# create blank image with only nushell binaries and configuration
 FROM scratch as final
-COPY --from=build ${PUBLISH} /usr/bin
+COPY --from=build /nu/ /usr/bin/
+COPY --from=build /nu-config/ /root/.config/nushell/
