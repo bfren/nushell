@@ -78,13 +78,13 @@ $env.ENV_CONVERSIONS = {
 # Directories to search for scripts when calling source or use
 $env.NU_LIB_DIRS = [
     # FIXME: This default is not implemented in rust code as of 2023-09-06.
-    ($nu.default-config-dir | path join 'scripts') # add <nushell-config-dir>/scripts
+    "/etc/nu/scripts" # add <nushell-config-dir>/scripts
 ]
 
 # Directories to search for plugin binaries when calling register
 $env.NU_PLUGIN_DIRS = [
     # FIXME: This default is not implemented in rust code as of 2023-09-06.
-    ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
+    "/etc/nu/plugins" # add <nushell-config-dir>/plugins
 ]
 
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
