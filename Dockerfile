@@ -26,14 +26,16 @@ RUN EXCLUDE="--exclude nu-cmd-dataframe" && \
     cargo fetch --locked && \
     cargo build --workspace --release --frozen ${EXCLUDE}
 
-# move binaries to publish directory
+# move binaries to publish directories
 RUN mkdir -p /nu && \
+    cp target/release/nu /nu/ && \
+    mkdir -p /nu-plugins && \
     find target/release \
       -maxdepth 1 \
       -executable \
       -type f \
-      -name "nu*" \
-      -exec install -Dm755 '{}' -t /nu/ \;
+      -name "nu_plugin*" \
+      -exec install -Dm755 '{}' -t /nu-plugins/ \;
 
 # add configuration files for this version
 ADD https://raw.githubusercontent.com/bfren/nushell/main/${NUSHELL}/config.nu /nu-config/config.nu
@@ -43,3 +45,4 @@ ADD https://raw.githubusercontent.com/bfren/nushell/main/${NUSHELL}/env.nu /nu-c
 FROM scratch as final
 COPY --from=build /nu/ /usr/bin/
 COPY --from=build /nu-config/ /root/.config/nushell/
+COPY --from=build /nu-plugins/ /root/.config/nushell/plugins/
