@@ -1,10 +1,9 @@
-FROM alpine:edge AS build
+FROM rust:alpine AS build
 ARG NUSHELL=0.93.0
 
 # install build prerequisites
 RUN apk add --no-cache \
     bash \
-    cargo \
     libgit2-dev \
     openssl-dev \
     sqlite-dev
