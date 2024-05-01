@@ -1,10 +1,5 @@
-FROM alpine:edge AS build
+FROM rust:alpine AS build
 ARG NUSHELL=0.93.0
-
-# install latest Rust toolchain
-WORKDIR /tmp
-RUN wget -O rustup-init.sh https://sh.rustup.rs && chmod +x rustup-init.sh && \
-    ./rustup-init.sh -y
 
 # install build prerequisites
 RUN apk add --no-cache \
