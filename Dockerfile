@@ -1,5 +1,5 @@
 FROM alpine:edge AS build
-ARG NUSHELL=0.91.0
+ARG NUSHELL=0.93.0
 
 # install build prerequisites
 RUN apk add --no-cache \
