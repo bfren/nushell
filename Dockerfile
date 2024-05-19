@@ -6,6 +6,7 @@ RUN apk add --no-cache \
     bash \
     cargo \
     libgit2-dev \
+	mimalloc2-dev \
     openssl-dev \
     sqlite-dev
 
@@ -21,8 +22,9 @@ RUN TARGET=$(rustc -vV | sed -n 's/host: //p') && \
     echo "" >> ${CONFIG} && \
     echo "[target.${TARGET}]" >> ${CONFIG} && \
     echo "git2 = { rustc-link-lib = [\"git2\"] }" >> ${CONFIG} && \
+    echo "mimalloc = { rustc-link-lib = [\"mimalloc\"] }" >> ${CONFIG} && \
     echo "rusqlite = { rustc-link-lib = [\"sqlite3\"] }" >> ${CONFIG}
-RUN EXCLUDE="--exclude nu-cmd-dataframe" && \
+RUN EXCLUDE="--exclude nu-cmd-dataframe --exclude nu-cmd-extra --exclude nu_plugin_gstat --exclude nu_plugin_polars" && \
     cargo fetch --locked && \
     cargo build --workspace --release --frozen ${EXCLUDE}
 
