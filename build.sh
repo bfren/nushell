@@ -2,8 +2,18 @@
 
 set -euo pipefail
 
-N=${1}                                  # Nushell version
-P=linux/amd64,linux/arm/v7,linux/arm64  # Platforms to build
-T=ghcr.io/bfren/nushell:${N}            # Tag to use
+DISTROS=("alpine" "debian")
+NUSHELL=${1}
+PLATFORM=linux/amd64,linux/arm/v7,linux/arm64
+REPO=ghcr.io/bfren/nushell
 
-docker buildx build --build-arg NUSHELL=${N} --platform ${P} --tag ${T} --push .
+for DISTRO in "${DISTROS[*]}" ; do
+    docker buildx build \
+        --file ${DISTRO}.Dockerfile \
+        --build-arg NUSHELL=${NUSHELL} \
+        --platform ${PLATFORM} \
+        --push \
+        --tag ${REPO}:${DISTRO} \
+        --tag ${REPO}:${NUSHELL}-${DISTRO} \
+        .
+done
