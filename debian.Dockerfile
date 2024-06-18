@@ -1,4 +1,6 @@
-FROM rust AS build
+ARG DISTRO
+
+FROM rust:${DISTRO} AS build
 ARG NUSHELL=0.94.2
 
 # install build prerequisites
