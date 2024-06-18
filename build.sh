@@ -4,7 +4,7 @@ set -euo pipefail
 
 DISTROS="alpine bullseye bookworm"
 NUSHELL=${1}
-PLATFORM=linux/amd64,linux/arm/v7,linux/arm64
+PLATFORM=linux/amd64,linux/arm64
 REPO=ghcr.io/bfren/nushell
 
 for DISTRO in ${DISTROS} ; do
