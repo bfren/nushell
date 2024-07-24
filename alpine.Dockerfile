@@ -1,5 +1,5 @@
 FROM alpine AS build
-ARG NUSHELL=0.94.2
+ARG NUSHELL=0.96.0
 
 # install build prerequisites
 RUN apk add --no-cache \
