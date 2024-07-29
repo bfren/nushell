@@ -2,18 +2,19 @@
 
 set -euo pipefail
 
-DISTROS="alpine bullseye bookworm"
+# Variables
 NUSHELL=${1}
-PLATFORM=linux/amd64,linux/arm64
+ALPINE_PLATFORM=linux/amd64,linux/arm64,linux/arm/v7
+DEBIAN="bullseye bookworm"
+DEBIAN_PLATFORM=linux/amd64,linux/arm64
 REPO=ghcr.io/bfren/nushell
 
-for DISTRO in ${DISTROS} ; do
+build () {
 
-    # get correct Dockerfile
-    DOCKERFILE=${DISTRO}.Dockerfile
-    if [ ! -f ${DOCKERFILE} ] ; then DOCKERFILE=debian.Dockerfile ; fi
+    DOCKERFILE=${1}
+    DISTRO=${2}
+    PLATFORM=${3}
 
-    # build and push image
     docker buildx build \
         --file ${DOCKERFILE} \
         --build-arg DISTRO=${DISTRO} \
@@ -23,5 +24,12 @@ for DISTRO in ${DISTROS} ; do
         --tag ${REPO}:${DISTRO} \
         --tag ${REPO}:${NUSHELL}-${DISTRO} \
         .
+}
 
+# Alpine
+build "alpine.Dockerfile" "alpine" ${ALPINE_PLATFORM}
+
+# Debian
+for DISTRO in ${DEBIAN} ; do
+    build "debian.Dockerfile" ${DISTRO} ${DEBIAN_PLATFORM}
 done
