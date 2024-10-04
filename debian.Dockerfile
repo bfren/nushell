@@ -17,26 +17,12 @@ RUN wget https://github.com/nushell/nushell/archive/${NUSHELL}.tar.gz && \
 
 # build
 WORKDIR /tmp/nushell-${NUSHELL}
-RUN TARGET=$(rustc -vV | sed -n 's/host: //p') && \
-    CONFIG=.cargo/config.toml && \
-    echo "" >> ${CONFIG} && \
-    echo "[target.${TARGET}]" >> ${CONFIG} && \
-    echo "git2 = { rustc-link-lib = [\"git2\"] }" >> ${CONFIG} && \
-    echo "rusqlite = { rustc-link-lib = [\"sqlite3\"] }" >> ${CONFIG}
-RUN EXCLUDE="--exclude nu-cmd-extra --exclude nu_plugin_gstat --exclude nu_plugin_polars" && \
-    cargo fetch --locked && \
-    cargo build --workspace --release --frozen ${EXCLUDE}
+COPY ./build.sh .
+RUN chmod +x build.sh && ./build.sh
 
 # move binaries to publish directories
-RUN mkdir -p /nu && \
-    cp target/release/nu /nu/ && \
-    mkdir -p /nu-plugins && \
-    find target/release \
-      -maxdepth 1 \
-      -executable \
-      -type f \
-      -name "nu_plugin*" \
-      -exec install -Dm755 '{}' -t /nu-plugins/ \;
+COPY ./move.sh .
+RUN chmod +x move.sh && ./move.sh
 
 # add configuration files for this version
 ADD https://raw.githubusercontent.com/bfren/nushell/main/${NUSHELL}/config.nu /nu-config/config.nu
