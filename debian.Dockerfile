@@ -1,7 +1,7 @@
 ARG DISTRO
 
 FROM rust:${DISTRO} AS build
-ARG NUSHELL=0.97.1
+ARG NUSHELL=0.98.0
 
 # install build prerequisites
 RUN apt update && apt install --no-install-recommends -y \
