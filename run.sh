@@ -8,6 +8,7 @@ ALPINE_PLATFORM=linux/amd64,linux/arm64,linux/arm/v7
 DEBIAN="bullseye bookworm"
 DEBIAN_PLATFORM=linux/amd64,linux/arm64
 REPO=ghcr.io/bfren/nushell
+VERSION=`cat ./VERSION`
 
 build () {
 
@@ -22,7 +23,9 @@ build () {
         --platform ${PLATFORM} \
         --push \
         --tag ${REPO}:${DISTRO} \
+        --tag ${REPO}:${DISTRO}-${VERSION} \
         --tag ${REPO}:${NUSHELL}-${DISTRO} \
+        --tag ${REPO}:${NUSHELL}-${DISTRO}-${VERSION} \
         .
 }
 

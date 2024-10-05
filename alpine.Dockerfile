@@ -1,18 +1,17 @@
-FROM alpine AS build
+FROM bfren/alpine AS build
 ARG NUSHELL=0.98.0
 
 # install build prerequisites
 RUN apk add --no-cache \
-    bash \
-    cargo \
+    cargo@edgemain \
     libgit2-dev \
     openssl-dev \
     sqlite-dev
 
 # get source
 WORKDIR /tmp
-RUN wget https://github.com/nushell/nushell/archive/${NUSHELL}.tar.gz && \
-    tar -xf ${NUSHELL}.tar.gz
+ADD https://github.com/nushell/nushell/archive/${NUSHELL}.tar.gz .
+RUN tar -xf ${NUSHELL}.tar.gz
 
 # build
 WORKDIR /tmp/nushell-${NUSHELL}
