@@ -1,23 +1,14 @@
-FROM bfren/alpine AS build
+FROM --platform=${BUILDPLATFORM} golang:alpine AS build
+ARG TARGETPLATFORM
+ARG DISTRO=alpine
 ARG NUSHELL_VERSION=0.101.0
 ARG VERSION=250124
 
-# install build prerequisites
-RUN apk add --no-cache \
-    cargo@edgemain \
-    libgit2-dev \
-    openssl-dev \
-    sqlite-dev
-
-# get source
 WORKDIR /tmp
-ADD https://github.com/nushell/nushell/archive/${NUSHELL_VERSION}.tar.gz .
-RUN tar -xf ${NUSHELL_VERSION}.tar.gz
 
-# build
-WORKDIR /tmp/nushell-${NUSHELL_VERSION}
-COPY ./build.sh .
-RUN chmod +x build.sh && ./build.sh
+# download binaries
+COPY ./download.sh .
+RUN chmod +x download.sh && ./download.sh
 
 # move binaries to publish directories
 COPY ./move.sh .

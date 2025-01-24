@@ -2,13 +2,13 @@
 
 set -eu
 
-# move nu executable
+# move nu executables
 mkdir -p /nu 
-mv target/release/nu /nu/ 
+mv nu* /nu/ 
 
 # move nu plugins
 mkdir -p /nu-plugins
-find target/release \
+find /nu \
     -maxdepth 1 \
     -executable \
     -type f \

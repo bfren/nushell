@@ -4,20 +4,18 @@ set -euo pipefail
 
 # Variables
 NUSHELL_VERSION=${1}
-ALPINE_PLATFORM=linux/amd64,linux/arm64,linux/arm/v7
-DEBIAN="bullseye bookworm"
-DEBIAN_PLATFORM=linux/amd64,linux/arm64
+PLATFORM=linux/amd64,linux/arm64,linux/arm/v7
+DISTROS="alpine bullseye bookworm"
 REPO=ghcr.io/bfren/nushell
 VERSION=`cat ./VERSION`
 
 build () {
 
-    DOCKERFILE=${1}
-    DISTRO=${2}
-    PLATFORM=${3}
+    DISTRO=${1}
+    PLATFORM=${2}
 
     docker buildx build \
-        --file ${DOCKERFILE} \
+        --file ./Dockerfile \
         --build-arg DISTRO=${DISTRO} \
         --build-arg NUSHELL_VERSION=${NUSHELL_VERSION} \
         --build-arg VERSION=${VERSION} \
@@ -30,10 +28,6 @@ build () {
         .
 }
 
-# Alpine
-build "alpine.Dockerfile" "alpine" ${ALPINE_PLATFORM}
-
-# Debian
-for DISTRO in ${DEBIAN} ; do
-    build "debian.Dockerfile" ${DISTRO} ${DEBIAN_PLATFORM}
+for DISTRO in ${DISTROS} ; do
+    build ${DISTRO} ${PLATFORM}
 done
