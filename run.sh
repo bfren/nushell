@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # Variables
-NUSHELL_VERSION=${1}.${2}
+NUSHELL_VERSION=${1}
 ALPINE_PLATFORM=linux/amd64,linux/arm64,linux/arm/v7
 DEBIAN="bullseye bookworm"
 DEBIAN_PLATFORM=linux/amd64,linux/arm64
