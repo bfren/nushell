@@ -19,6 +19,7 @@ build () {
     docker buildx build \
         --file ${DOCKERFILE} \
         --build-arg DISTRO=${DISTRO} \
+        --build-arg NUSHELL_VERSION=${NUSHELL_VERSION} \
         --build-arg VERSION=${VERSION} \
         --platform ${PLATFORM} \
         --push \

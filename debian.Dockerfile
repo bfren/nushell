@@ -1,9 +1,8 @@
 ARG DISTRO
 
 FROM rust:${DISTRO} AS build
-ARG MINOR=0.100
-ARG REVISION=0
-ARG VERSION=0.100.0
+ARG NUSHELL_VERSION=0.101.0
+ARG VERSION=250124
 
 # install build prerequisites
 RUN apt update && apt install --no-install-recommends -y \
@@ -13,8 +12,8 @@ RUN apt update && apt install --no-install-recommends -y \
 
 # get source
 WORKDIR /tmp
-ADD https://github.com/nushell/nushell/archive/${VERSION}.tar.gz .
-RUN tar -xf ${VERSION}.tar.gz
+ADD https://github.com/nushell/nushell/archive/${NUSHELL_VERSION}.tar.gz .
+RUN tar -xf ${NUSHELL_VERSION}.tar.gz
 
 # build
 WORKDIR /tmp/nushell-${VERSION}

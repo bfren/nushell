@@ -1,7 +1,6 @@
 FROM bfren/alpine AS build
-ARG MINOR=0.100
-ARG REVISION=0
-ARG VERSION=0.100.0
+ARG NUSHELL_VERSION=0.101.0
+ARG VERSION=250124
 
 # install build prerequisites
 RUN apk add --no-cache \
@@ -12,8 +11,8 @@ RUN apk add --no-cache \
 
 # get source
 WORKDIR /tmp
-ADD https://github.com/nushell/nushell/archive/${VERSION}.tar.gz .
-RUN tar -xf ${VERSION}.tar.gz
+ADD https://github.com/nushell/nushell/archive/${NUSHELL_VERSION}.tar.gz .
+RUN tar -xf ${NUSHELL_VERSION}.tar.gz
 
 # build
 WORKDIR /tmp/nushell-${VERSION}
