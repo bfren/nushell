@@ -23,3 +23,6 @@ FROM scratch as final
 COPY --from=build /nu/ /usr/bin/
 COPY --from=build /nu-config/ /root/.config/nushell/
 COPY --from=build /nu-plugins/ /root/.config/nushell/plugins/
+
+LABEL org.opencontainers.image.description="Nushell with custom configuration."
+LABEL org.opencontainers.image.source="https://github.com/nushell/nushell"
