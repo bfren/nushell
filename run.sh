@@ -3,8 +3,6 @@
 set -euo pipefail
 
 # Variables
-NUSHELL_MINOR=${1}
-NUSHELL_REVISION=${2}
 NUSHELL_VERSION=${1}.${2}
 ALPINE_PLATFORM=linux/amd64,linux/arm64,linux/arm/v7
 DEBIAN="bullseye bookworm"
@@ -21,9 +19,7 @@ build () {
     docker buildx build \
         --file ${DOCKERFILE} \
         --build-arg DISTRO=${DISTRO} \
-        --build-arg MINOR=${NUSHELL_MINOR} \
-        --build-arg REVISION=${NUSHELL_REVISION} \
-        --build-arg VERSION=${NUSHELL_VERSION} \
+        --build-arg VERSION=${VERSION} \
         --platform ${PLATFORM} \
         --push \
         --tag ${REPO}:${DISTRO} \

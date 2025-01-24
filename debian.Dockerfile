@@ -26,8 +26,8 @@ COPY ./move.sh .
 RUN chmod +x move.sh && ./move.sh
 
 # add configuration files for this version
-ADD https://raw.githubusercontent.com/bfren/nushell/main/${MINOR}.x/${VERSION}/config.nu /nu-config/config.nu
-ADD https://raw.githubusercontent.com/bfren/nushell/main/${MINOR}.x/${VERSION}/env.nu /nu-config/env.nu
+ADD https://raw.githubusercontent.com/bfren/nushell/refs/tags/v${VERSION}/config.nu /nu-config/config.nu
+ADD https://raw.githubusercontent.com/bfren/nushell/refs/tags/v${VERSION}/env.nu /nu-config/env.nu
 
 # create blank image with only binaries and configuration
 FROM scratch as final
