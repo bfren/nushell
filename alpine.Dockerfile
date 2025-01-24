@@ -15,7 +15,7 @@ ADD https://github.com/nushell/nushell/archive/${NUSHELL_VERSION}.tar.gz .
 RUN tar -xf ${NUSHELL_VERSION}.tar.gz
 
 # build
-WORKDIR /tmp/nushell-${VERSION}
+WORKDIR /tmp/nushell-${NUSHELL_VERSION}
 COPY ./build.sh .
 RUN chmod +x build.sh && ./build.sh
 
