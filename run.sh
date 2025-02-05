@@ -5,7 +5,7 @@ set -euo pipefail
 # Variables
 NUSHELL_VERSION=${1}
 PLATFORM=linux/amd64,linux/arm64,linux/arm/v7
-DISTROS="alpine bullseye bookworm"
+DISTROS="alpine bookworm trixie"
 REPO=ghcr.io/bfren/nushell
 VERSION=`cat ./VERSION`
 

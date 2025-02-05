@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        distro: ["alpine", "bookworm"]
+        distro: ["alpine", "bookworm", "trixie"]
         nushell: ["0.102.0"]
     steps:
       -
