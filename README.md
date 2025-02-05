@@ -1,6 +1,6 @@
-# Custom Nushell Builds
+# Custom Nushell Config
 
-Build for Alpine, with (slightly) modified configuration based on default [config.nu](https://raw.githubusercontent.com/nushell/nushell/main/crates/nu-utils/src/sample_config/default_config.nu) and [env.nu](https://raw.githubusercontent.com/nushell/nushell/main/crates/nu-utils/src/sample_config/default_env.nu).
+Default builds of Nushell with some custom config applied.
 
 Creates a Docker image containing:
 
@@ -11,8 +11,16 @@ Creates a Docker image containing:
 Which means you can do this in a Dockerfile to install Nushell:
 
 ```Dockerfile
-FROM ghcr.io/bfren/nushell:0.90.1 as nushell
+FROM ghcr.io/bfren/nushell:0.102.0 as nushell
 
 FROM alpine as final
 COPY --from=nushell / /
 ```
+
+## Licence
+
+> MIT
+
+## Copyright
+
+> Copyright (c) 2023-2025 bfren (unless otherwise stated)
