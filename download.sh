@@ -15,8 +15,8 @@ case "${TARGETPLATFORM}" in
 esac
 
 printf "%s" "${ARCH}" > ARCH
-BASE=https://github.com/nushell/nushell/releases/download/0.101.0
-FILE=nu-0.101.0-${ARCH}-unknown-linux-${LIBC}
+BASE=https://github.com/nushell/nushell/releases/download/${NUSHELL_VERSION}
+FILE=nu-${NUSHELL_VERSION}-${ARCH}-unknown-linux-${LIBC}
 
 # download and verify binary
 wget ${BASE}/${FILE}.tar.gz
