@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         distro: ["alpine", "bookworm", "trixie"]
-        nushell: ["0.102.0"]
+        nushell: ["0.102.0", "0.103.0"]
     steps:
       -
         name: Checkout repository
