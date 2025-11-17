@@ -1,7 +1,7 @@
 FROM --platform=${BUILDPLATFORM} golang:alpine AS build
 ARG TARGETPLATFORM
 ARG DISTRO=alpine
-ARG NUSHELL_VERSION=0.104.1
+ARG NUSHELL_VERSION=0.108.0
 ARG VERSION=250606
 
 WORKDIR /tmp
@@ -19,7 +19,7 @@ ADD https://raw.githubusercontent.com/bfren/nushell/refs/tags/v${VERSION}/config
 ADD https://raw.githubusercontent.com/bfren/nushell/refs/tags/v${VERSION}/env.nu /nu-config/env.nu
 
 # create blank image with only binaries and configuration
-FROM scratch as final
+FROM scratch AS final
 COPY --from=build /nu/ /usr/bin/
 COPY --from=build /nu-config/ /root/.config/nushell/
 COPY --from=build /nu-plugins/ /root/.config/nushell/plugins/
