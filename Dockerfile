@@ -1,4 +1,4 @@
-FROM --platform=${BUILDPLATFORM} bfren/alpine AS build
+FROM --platform=${BUILDPLATFORM} quay.io/bfren/alpine AS build
 ARG TARGETPLATFORM
 ARG DISTRO=alpine
 ARG NUSHELL_VERSION=0.108.0
