@@ -11,7 +11,7 @@ Creates a Docker image containing:
 Which means you can do this in a Dockerfile to install Nushell:
 
 ```Dockerfile
-FROM quay.io/bfren/nushell:0.108.0-alpine as nushell
+FROM quay.io/bfren/nushell:0.112.1-alpine as nushell
 
 FROM alpine as final
 COPY --from=nushell / /
@@ -23,4 +23,4 @@ COPY --from=nushell / /
 
 ## Copyright
 
-> Copyright (c) 2023-2025 bfren (unless otherwise stated)
+> Copyright (c) 2023-2026 bfren (unless otherwise stated)
