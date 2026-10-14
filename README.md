@@ -19,7 +19,9 @@ COPY --from=nushell / /
 
 ## Licence
 
-> MIT
+The build scripts in this repository are released under the [MIT licence](https://mit.bfren.dev/2022).
+
+Nushell is also licensed under the [MIT LIence](https://github.com/nushell/nushell?tab=MIT-1-ov-file)).
 
 ## Copyright
 
