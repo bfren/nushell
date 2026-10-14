@@ -1,6 +1,6 @@
 # Custom Nushell Config
 
-Default builds of [Nushell](https://nushell.sh) with some custom config applied.
+Default builds of [Nushell](https://nushell.sh) with a stripped binary to reduce the size, and custom config applied.
 
 Creates a Docker image containing:
 
