@@ -13,7 +13,7 @@ Which means you can do this in a Dockerfile to install Nushell:
 ```Dockerfile
 FROM quay.io/bfren/nushell:0.116.1-alpine AS nushell
 
-FROM alpine as final
+FROM alpine AS final
 COPY --from=nushell / /
 ```
 
