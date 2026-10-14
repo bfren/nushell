@@ -10,6 +10,9 @@ WORKDIR /tmp
 COPY ./download.sh .
 RUN chmod +x download.sh && ./download.sh
 
+# install llvm-strip (used by move.sh) - unlike binutils strip it handles every target architecture
+RUN apk add --no-cache llvm
+
 # move binaries to publish directories
 COPY ./move.sh .
 RUN chmod +x move.sh && ./move.sh
