@@ -8,8 +8,7 @@
 - **Size:** executables are stripped with `llvm-strip` - official releases only remove debug information,
   so this saves 25-35%.
 - **Plugins:** the release's `nu_plugin_*` executables are copied to the plugins directory.
-- **Config:** [config.nu](config.nu), taken from this repository's Git tag `v<VERSION>` - so the tag must exist
-  on GitHub before an image is built.
+- **Config:** [config.nu](config.nu), copied from the commit being built.
 
 Each image contains:
 
@@ -45,9 +44,8 @@ configuration every time.
 
 1. Update the `nushell` matrix in the [build workflow](.github/workflows/build.yml), the `NUSHELL_VERSION` default
    in [Dockerfile](Dockerfile) and the matrix above.
-2. Set [VERSION](VERSION) to today's date (`yymmdd`), and update the `VERSION` default in [Dockerfile](Dockerfile).
-3. Commit, then tag the commit `v<VERSION>` and push the tag - the build downloads `config.nu` from that tag.
-4. Run the `build` workflow.
+2. Set [VERSION](VERSION) to today's date (`yymmdd`).
+3. Commit and run the `build` workflow.
 
 ## Usage
 

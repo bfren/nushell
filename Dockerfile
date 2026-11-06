@@ -2,7 +2,6 @@ FROM --platform=${BUILDPLATFORM} alpine AS build
 ARG TARGETPLATFORM
 ARG DISTRO=alpine
 ARG NUSHELL_VERSION=0.116.1
-ARG VERSION=261014
 
 WORKDIR /tmp
 
@@ -18,7 +17,7 @@ COPY ./move.sh .
 RUN chmod +x move.sh && ./move.sh
 
 # add configuration file for this version
-ADD https://raw.githubusercontent.com/bfren/nushell/refs/tags/v${VERSION}/config.nu /nu-config/config.nu
+COPY ./config.nu /nu-config/config.nu
 
 # create blank image with only binaries and configuration
 FROM scratch AS final
