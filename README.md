@@ -38,8 +38,8 @@ Images are published to `quay.io/bfren-bin/nushell`:
 | `NUSHELL-DISTRO-VERSION` | `0.116.1-alpine-261106.2` |
 
 `VERSION` is the build date (`yymmdd`) in [VERSION](VERSION) - pin it to get exactly the same binaries and
-configuration every time. Builds from any branch other than `main` add `-dev` to every tag. `DISTRO` and
-`NUSHELL-DISTRO` move with each build.
+configuration every time. Builds from any branch other than `main` add `-dev` to every tag. Each release is also a
+GitHub release, `v<VERSION>`, on the commit that built it. `DISTRO` and `NUSHELL-DISTRO` move with each build.
 
 ## Adding a release
 
