@@ -4,13 +4,15 @@ on:
   push:
     branches: ['**']
     tags-ignore: ['**']
+    # docs-only pushes would rebuild the same VERSION, which main refuses
+    paths-ignore: ['**.md']
   workflow_dispatch:
 
-# one run per branch at a time - a newer push cancels the older run, so it cannot finish last and overwrite the
-# newer images
+# one run per branch at a time - on other branches a newer push cancels the older run, so it cannot finish last and
+# overwrite the newer images; on main it waits, so a release is never cancelled halfway through tagging
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.ref_name != 'main' }}
 
 jobs:
   build:
