@@ -56,7 +56,7 @@ You can find live examples in my [Alpine](https://github.com/bfren/docker-alpine
 
 ```Dockerfile
 # use tags to load the Nushell build for your distribution
-FROM quay.io/bfren-bin/nushell:0.116.1-alpine-261014 AS nushell
+FROM quay.io/bfren-bin/nushell:0.116.1-alpine-261106 AS nushell
 
 FROM alpine:3.24 AS final
 COPY --from=nushell / /
