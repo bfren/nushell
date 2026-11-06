@@ -21,6 +21,9 @@ jobs:
       matrix:
         distro: [ "alpine", "bullseye", "bookworm", "trixie" ]
         nushell: [ "0.116.1" ]
+    permissions:
+      # to create the release
+      contents: write
     uses: bfren/docker/.github/workflows/build-bin.yml@main
     with:
       image: nushell
