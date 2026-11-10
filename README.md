@@ -23,6 +23,7 @@ Each image contains:
 | Nushell     | alpine  | bullseye | bookworm | trixie  |
 | ----------- | :-----: | :------: | :------: | :-----: |
 | **0.116.1** | &check; | &check;  | &check;  | &check; |
+| **0.117.0** | &check; | &check;  | &check;  | &check; |
 
 Every image is built for `linux/amd64`, `linux/arm64` and `linux/arm/v7`.
 
@@ -32,14 +33,12 @@ Images are published to `quay.io/bfren-bin/nushell`:
 
 | Tag                      | Example                   |
 | ------------------------ | ------------------------- |
-| `DISTRO`                 | `alpine`                  |
-| `DISTRO-VERSION`         | `alpine-261106.3`         |
-| `NUSHELL-DISTRO`         | `0.116.1-alpine`          |
-| `NUSHELL-DISTRO-VERSION` | `0.116.1-alpine-261106.3` |
+| `NUSHELL-DISTRO`         | `0.117.0-alpine`          |
+| `NUSHELL-DISTRO-VERSION` | `0.117.0-alpine-261110`   |
 
 `VERSION` is the build date (`yymmdd`) in [VERSION](VERSION) - pin it to get exactly the same binaries and
 configuration every time. Builds from any branch other than `main` add `-dev` to every tag. Each release is also a
-GitHub release, `v<VERSION>`, on the commit that built it. `DISTRO` and `NUSHELL-DISTRO` move with each build.
+GitHub release, `v<VERSION>`, on the commit that built it. `NUSHELL-DISTRO` moves with each build.
 
 ## Adding a release
 
@@ -56,7 +55,7 @@ You can find live examples in my [Alpine](https://github.com/bfren/docker-alpine
 
 ```Dockerfile
 # load the Nushell build for your distribution
-FROM quay.io/bfren-bin/nushell:0.116.1-alpine-261106.3 AS nushell
+FROM quay.io/bfren-bin/nushell:0.117.0-alpine-261110 AS nushell
 
 # use the same distribution
 FROM alpine:3.24

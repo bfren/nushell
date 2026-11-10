@@ -32,8 +32,6 @@ jobs:
         NUSHELL_VERSION=${{ matrix.nushell }}
       tags: |
         ${{ matrix.nushell }}-${{ matrix.distro }}-${VERSION}
-        ${{ matrix.distro }}-${VERSION}
         ${{ matrix.nushell }}-${{ matrix.distro }}
-        ${{ matrix.distro }}
     secrets:
       QUAY_TOKEN: ${{ secrets.QUAY_TOKEN }}
