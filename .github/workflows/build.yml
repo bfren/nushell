@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         distro: [ "alpine", "bullseye", "bookworm", "trixie" ]
-        nushell: [ "0.116.1" ]
+        nushell: [ "0.116.1", "0.117.0" ]
     permissions:
       # to create the release
       contents: write
