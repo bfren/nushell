@@ -5,7 +5,8 @@ set -euo pipefail
 # Variables
 NUSHELL_VERSION=${1}
 PLATFORM=linux/amd64,linux/arm64,linux/arm/v7
-DISTROS="alpine bullseye bookworm trixie"
+# keep tags and distros in step with .github/workflows/build.yml
+DISTROS="alpine bookworm trixie"
 REPO=quay.io/bfren-bin/nushell
 VERSION=`cat ./VERSION`
 
@@ -21,8 +22,6 @@ build () {
         --build-arg VERSION=${VERSION} \
         --platform ${PLATFORM} \
         --push \
-        --tag ${REPO}:${DISTRO} \
-        --tag ${REPO}:${DISTRO}-${VERSION} \
         --tag ${REPO}:${NUSHELL_VERSION}-${DISTRO} \
         --tag ${REPO}:${NUSHELL_VERSION}-${DISTRO}-${VERSION} \
         .
