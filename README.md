@@ -20,10 +20,10 @@ Each image contains:
 
 ## Matrix
 
-| Nushell     | alpine  | bullseye | bookworm | trixie  |
-| ----------- | :-----: | :------: | :------: | :-----: |
-| **0.116.1** | &check; | &check;  | &check;  | &check; |
-| **0.117.0** | &check; | &check;  | &check;  | &check; |
+| Nushell     | alpine  | bookworm | trixie  |
+| ----------- | :-----: | :------: | :-----: |
+| **0.116.1** | &check; | &check;  | &check; |
+| **0.117.0** | &check; | &check;  | &check; |
 
 Every image is built for `linux/amd64`, `linux/arm64` and `linux/arm/v7`.
 
@@ -31,10 +31,10 @@ Every image is built for `linux/amd64`, `linux/arm64` and `linux/arm/v7`.
 
 Images are published to `quay.io/bfren-bin/nushell`:
 
-| Tag                      | Example                   |
-| ------------------------ | ------------------------- |
-| `NUSHELL-DISTRO`         | `0.117.0-alpine`          |
-| `NUSHELL-DISTRO-VERSION` | `0.117.0-alpine-261110`   |
+| Tag                      | Example                 |
+| ------------------------ | ----------------------- |
+| `NUSHELL-DISTRO`         | `0.117.0-alpine`        |
+| `NUSHELL-DISTRO-VERSION` | `0.117.0-alpine-261124` |
 
 `VERSION` is the build date (`yymmdd`) in [VERSION](VERSION) - pin it to get exactly the same binaries and
 configuration every time. Builds from any branch other than `main` add `-dev` to every tag. Each release is also a
@@ -55,7 +55,7 @@ You can find live examples in my [Alpine](https://github.com/bfren/docker-alpine
 
 ```Dockerfile
 # load the Nushell build for your distribution
-FROM quay.io/bfren-bin/nushell:0.117.0-alpine-261110 AS nushell
+FROM quay.io/bfren-bin/nushell:0.117.0-alpine-261124 AS nushell
 
 # use the same distribution
 FROM alpine:3.24

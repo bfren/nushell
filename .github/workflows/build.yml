@@ -19,7 +19,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        distro: [ "alpine", "bullseye", "bookworm", "trixie" ]
+        # no bullseye: the glibc builds need glibc 2.34 but Debian 11 has 2.31, so nu could not start there - and
+        # Debian 11 reached end of life on 2026-08-31
+        distro: [ "alpine", "bookworm", "trixie" ]
         nushell: [ "0.116.1", "0.117.0" ]
     permissions:
       # to create the release
