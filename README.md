@@ -34,7 +34,7 @@ Images are published to `quay.io/bfren-bin/nushell`:
 | Tag                      | Example                 |
 | ------------------------ | ----------------------- |
 | `NUSHELL-DISTRO`         | `0.117.0-alpine`        |
-| `NUSHELL-DISTRO-VERSION` | `0.117.0-alpine-261124` |
+| `NUSHELL-DISTRO-VERSION` | `0.117.0-alpine-261125` |
 
 `VERSION` is the build date (`yymmdd`) in [VERSION](VERSION) - pin it to get exactly the same binaries and
 configuration every time. Builds from any branch other than `main` add `-dev` to every tag. Each release is also a
@@ -55,7 +55,7 @@ You can find live examples in my [Alpine](https://github.com/bfren/docker-alpine
 
 ```Dockerfile
 # load the Nushell build for your distribution
-FROM quay.io/bfren-bin/nushell:0.117.0-alpine-261124 AS nushell
+FROM quay.io/bfren-bin/nushell:0.117.0-alpine-261125 AS nushell
 
 # use the same distribution
 FROM alpine:3.24
